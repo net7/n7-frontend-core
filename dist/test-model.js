@@ -5,6 +5,9 @@ var TestModel = /** @class */ (function () {
     TestModel.prototype.sayHi = function () {
         return "hello!";
     };
+    TestModel.prototype.sayBye = function () {
+        return "bye bye...";
+    };
     return TestModel;
 }());
 export { TestModel };
