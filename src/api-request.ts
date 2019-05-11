@@ -3,6 +3,21 @@ import { catchError } from "rxjs/operators";
 
 import { IProvider } from './interfaces';
 
+/**
+ * @class ApiRequest
+ * @implements {IProvider}
+ * 
+ * base class for making API requests
+ * 
+ * example:
+ * ```
+ *  const request$ = new ApiRequest(
+ *     this.http.get("https://jsonplaceholder.typicode.com/posts")
+ *  );
+ *  request$.out$.subscribe(response => console.log(response));
+ *  request$.run();
+ * ```
+ */
 export class ApiRequest implements IProvider {
   out$: Subject<any> = new Subject();
   output: any = null;
@@ -11,12 +26,23 @@ export class ApiRequest implements IProvider {
   private request$: Observable<any>;
   private called: boolean = false;
 
+  /**
+   * Creates an instance of ApiRequest.
+   * @param {Observable<any>} request
+   * @param {*} [options] request options
+   * @memberof ApiRequest
+   */
   constructor(request: Observable<any>, options?){
     this.request$ = request;
     this.options = options;
   }
 
-  run() {
+  /**
+   * runs request
+   * @returns {void}
+   * @memberof ApiRequest
+   */
+  run(): void {
     if (this.called) {
       return;
     }
@@ -45,7 +71,11 @@ export class ApiRequest implements IProvider {
       });
   }
 
-  reset() {
+  /**
+   * resets / clear request output
+   * @memberof ApiRequest
+   */
+  reset(): void {
     this.called = false;
     this.output = null;
   }

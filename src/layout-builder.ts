@@ -1,6 +1,40 @@
 import { Subject, merge } from "rxjs";
 import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
 
+/**
+ * base class to build components datasource/eventhandlers connections
+ * on app layouts
+ *
+ * @export
+ * @class LayoutBuilder
+ * 
+ * ```
+ * export class LayoutComponent implements OnInit {
+ *   public lb = new LayoutBuilder('layout-id');
+ *    private widgets = [ 
+ *      { id: 'test1' },
+ *      { id: 'test2' },
+ *    ];
+ *
+ *    constructor(){}
+ *
+ *    ngOnInit(){
+ *      // on ready
+ *      this.lb.ready$.subscribe(() => {
+ *        this.lb.eventHandler.emitInner('init');
+ *      });
+ *
+ *      this.lb.init({
+ *        widgetsConfig: this.widgets,
+ *        widgetsDataSources: DS, // components datasource classes 
+ *        widgetsEventHandlers: EH, // components eventhandler classes
+ *        dataSource: new LayoutDS(), // layout datasource
+ *        eventHandler: new LayoutEH(), // layout eventhandler
+ *      });
+ *    }
+ *  }
+ * ```
+ */
 export class LayoutBuilder {
   public id: string;
   public widgets = {};
@@ -16,6 +50,19 @@ export class LayoutBuilder {
     this.id = layoutId;
   }
 
+  /**
+   * inits connection build
+   *
+   * @param {// types
+   *     {
+   *       widgetsConfig: IWidgetConfig[], 
+   *       widgetsDataSources: any, 
+   *       widgetsEventHandlers: any, 
+   *       dataSource?: any, 
+   *       eventHandler?: IEventHandler
+   *     }} {widgetsConfig, widgetsDataSources, widgetsEventHandlers, dataSource, eventHandler}
+   * @memberof LayoutBuilder
+   */
   init(
     {widgetsConfig, widgetsDataSources, widgetsEventHandlers, dataSource, eventHandler}: 
     // types
@@ -80,6 +127,12 @@ export class LayoutBuilder {
     this.ready$.next();
   }
 
+  /**
+   * connect layout events to component eventhandler 
+   *
+   * @private
+   * @memberof LayoutBuilder
+   */
   private attachLayoutEvents(){
     let outs$ = Object.keys(this.widgets)
       .map((widgetId) => this.widgets[widgetId])
@@ -91,16 +144,39 @@ export class LayoutBuilder {
     this.eventHandler.listen();
   }
 
+  /**
+   * connect widget events to layout eventhandler 
+   *
+   * @private
+   * @param {*} widgetEventHandler
+   * @memberof LayoutBuilder
+   */
   private attachWidgetEvents(widgetEventHandler){
     widgetEventHandler.outerEvents$ = this.eventHandler.out$;
     widgetEventHandler.listen();
   }
 
-  private getWidgetId(widget){
+  /**
+   *  gets widget id
+   *
+   * @private
+   * @param {*} widget widget config
+   * @returns {string} widgetId
+   * @memberof LayoutBuilder
+   */
+  private getWidgetId(widget): string{
     return widget.id;
   }
 
-  private getWidgetDataSource(widget){
+  /**
+   * gets widget datasource
+   *
+   * @private
+   * @param {*} widget
+   * @returns {IDataSource | null}
+   * @memberof LayoutBuilder
+   */
+  private getWidgetDataSource(widget): IDataSource | null {
     let dataSource: IDataSource | null;
 
     if(widget.dataSource) {
@@ -116,7 +192,15 @@ export class LayoutBuilder {
     return dataSource;
   }
 
-  private getWidgetEventHandler(widget){
+  /**
+   * gets widget eventhandler
+   *
+   * @private
+   * @param {*} widget
+   * @returns {IEventHandler | null}
+   * @memberof LayoutBuilder
+   */
+  private getWidgetEventHandler(widget): IEventHandler | null{
     let eventHandler: any;
 
     if(widget.eventHandler) {
@@ -132,14 +216,37 @@ export class LayoutBuilder {
     return eventHandler;
   }
 
+  /**
+   * gets widget class name
+   *
+   * @private
+   * @param {*} widgetId
+   * @returns {string} widget class name
+   * @memberof LayoutBuilder
+   */
   private getWidgetBaseClass(widgetId){
     return widgetId.split('-').map(word => this._ucFirst(word)).join('');
   }
 
-  private _ucFirst(str: string) {
+  /**
+   * uppercase first char utility
+   *
+   * @private
+   * @param {string} str
+   * @returns {string}
+   * @memberof LayoutBuilder
+   */
+  private _ucFirst(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  /**
+   * triggered on ready$
+   * for internal functionality
+   *
+   * @private
+   * @memberof LayoutBuilder
+   */
   private _onReady(){
     // trigger update for widgets
     // w/initial data
