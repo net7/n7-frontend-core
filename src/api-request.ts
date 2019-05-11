@@ -4,10 +4,7 @@ import { catchError } from "rxjs/operators";
 import { IProvider } from './interfaces';
 
 /**
- * @class ApiRequest
- * @implements {IProvider}
- * 
- * base class for making API requests
+ * base class for making API requests 
  * 
  * example:
  * ```
@@ -17,6 +14,9 @@ import { IProvider } from './interfaces';
  *  request$.out$.subscribe(response => console.log(response));
  *  request$.run();
  * ```
+ * 
+ * @class ApiRequest
+ * @implements {IProvider}
  */
 export class ApiRequest implements IProvider {
   out$: Subject<any> = new Subject();

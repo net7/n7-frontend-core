@@ -4,36 +4,37 @@ import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
 /**
  * base class to build components datasource/eventhandlers connections
  * on app layouts
- *
- * @export
- * @class LayoutBuilder
  * 
+ * example:
  * ```
  * export class LayoutComponent implements OnInit {
  *   public lb = new LayoutBuilder('layout-id');
- *    private widgets = [ 
- *      { id: 'test1' },
- *      { id: 'test2' },
- *    ];
+ *   private widgets = [ 
+ *     { id: 'test1' },
+ *     { id: 'test2' },
+ *   ];
  *
- *    constructor(){}
+ *   constructor(){}
  *
- *    ngOnInit(){
- *      // on ready
- *      this.lb.ready$.subscribe(() => {
- *        this.lb.eventHandler.emitInner('init');
- *      });
+ *   ngOnInit(){
+ *     // on ready
+ *     this.lb.ready$.subscribe(() => {
+ *       this.lb.eventHandler.emitInner('init');
+ *     });
  *
- *      this.lb.init({
- *        widgetsConfig: this.widgets,
- *        widgetsDataSources: DS, // components datasource classes 
- *        widgetsEventHandlers: EH, // components eventhandler classes
- *        dataSource: new LayoutDS(), // layout datasource
- *        eventHandler: new LayoutEH(), // layout eventhandler
- *      });
- *    }
- *  }
+ *     this.lb.init({
+ *       widgetsConfig: this.widgets,
+ *       widgetsDataSources: DS, // components datasource classes 
+ *       widgetsEventHandlers: EH, // components eventhandler classes
+ *       dataSource: new LayoutDS(), // layout datasource
+ *       eventHandler: new LayoutEH(), // layout eventhandler
+ *     });
+ *   }
+ * }
  * ```
+ *
+ * @export
+ * @class LayoutBuilder
  */
 export class LayoutBuilder {
   public id: string;

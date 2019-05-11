@@ -1,11 +1,8 @@
 /**
  * base abstract class for layout datasources 
- *
- * @export
- * @abstract
- * @class LayoutDataSource
  * 
  * implementation example:
+ * ```
  * import { LayoutDataSource, ApiRequest } from '@dataviz/core';
  * 
  * export class LayoutDS extends LayoutDataSource {
@@ -25,6 +22,11 @@
  *     request$.run();
  *   }
  * }
+ * ```
+ *
+ * @export
+ * @abstract
+ * @class LayoutDataSource
  */
 export abstract class LayoutDataSource {
   widgets: any[];

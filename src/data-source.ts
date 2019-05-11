@@ -4,10 +4,6 @@ import { IDataSource } from "./interfaces";
 /**
  * base abstract class for components datasources
  * 
- * @abstract
- * @class DataSource
- * @implements {IDataSource}
- * 
  * implementation example:
  * ```
  * import { DataSource } from '@dataviz/core';
@@ -18,6 +14,10 @@ import { IDataSource } from "./interfaces";
  *   }
  * }
  * ``` 
+ * 
+ * @abstract
+ * @class DataSource
+ * @implements {IDataSource}
  */
 export abstract class DataSource implements IDataSource {
   out$: BehaviorSubject<any> = new BehaviorSubject(null);

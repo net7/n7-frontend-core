@@ -3,12 +3,6 @@ import { IEventHandler } from "./interfaces";
 
 /**
  * base abstract class for components eventhandlers
- *
- * @export
- * @abstract
- * @class EventHandler
- * @implements {IEventHandler}
- * 
  * 
  * implementation example:
  * ```
@@ -38,6 +32,11 @@ import { IEventHandler } from "./interfaces";
  *   }
  * }
  * ``` 
+ *
+ * @export
+ * @abstract
+ * @class EventHandler
+ * @implements {IEventHandler}
  */
 export abstract class EventHandler implements IEventHandler {
   innerEvents$: Subject<any> = new Subject();
