@@ -1,0 +1,601 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LayoutDataSource | @dataviz/core</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@dataviz/core</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_layout_data_source_.html">&quot;layout-data-source&quot;</a>
+				</li>
+				<li>
+					<a href="_layout_data_source_.layoutdatasource.html">LayoutDataSource</a>
+				</li>
+			</ul>
+			<h1>Class LayoutDataSource</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>base abstract class for layout datasources</p>
+					</div>
+					<p>implementation example:</p>
+					<pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">LayoutDataSource</span>, <span class="hljs-type">ApiRequest</span> } from '<span class="hljs-meta">@dataviz</span>/core';
+
+export <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LayoutDS</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LayoutDataSource</span> </span>{
+  <span class="hljs-keyword">private</span> http: any;
+
+  <span class="hljs-comment">// custom method</span>
+  <span class="hljs-comment">// can be called/triggerd by layout's eventhandler</span>
+  onInit(payload){
+    <span class="hljs-keyword">this</span>.http = payload.http;
+
+    const request$ = <span class="hljs-keyword">new</span> <span class="hljs-type">ApiRequest</span>(
+      &lt;any&gt;<span class="hljs-keyword">this</span>.http.get(<span class="hljs-string">"https://jsonplaceholder.typicode.com/posts"</span>)
+    );
+
+    request$.out$.subscribe(v =&gt; <span class="hljs-keyword">this</span>.one(<span class="hljs-symbol">'tes</span>t').update(v));
+
+    request$.run();
+  }
+}</code></pre>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>abstract</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>LayoutDataSource</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">LayoutDataSource</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_layout_data_source_.layoutdatasource.html#selectedwidgets" class="tsd-kind-icon">selected<wbr>Widgets</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#widgets" class="tsd-kind-icon">widgets</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#all" class="tsd-kind-icon">all</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#exclude" class="tsd-kind-icon">exclude</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#filter" class="tsd-kind-icon">filter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_layout_data_source_.layoutdatasource.html#getwidgetbyid" class="tsd-kind-icon">get<wbr>Widget<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#one" class="tsd-kind-icon">one</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#some" class="tsd-kind-icon">some</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_layout_data_source_.layoutdatasource.html#updateoptions" class="tsd-kind-icon">update<wbr>Options</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="selectedwidgets" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> selected<wbr>Widgets</h3>
+					<div class="tsd-signature tsd-kind-icon">selected<wbr>Widgets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in layout-data-source.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="widgets" class="tsd-anchor"></a>
+					<h3>widgets</h3>
+					<div class="tsd-signature tsd-kind-icon">widgets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in layout-data-source.ts:32</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="all" class="tsd-anchor"></a>
+					<h3>all</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">all<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:74</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets all widgets to widgets group</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="exclude" class="tsd-anchor"></a>
+					<h3>exclude</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">exclude<span class="tsd-signature-symbol">(</span>widgetsId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:86</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets all widgets to widgets group
+									excluding the ones on widgetsId</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>widgetsId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>widgets to exclude</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="filter" class="tsd-anchor"></a>
+					<h3>filter</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:99</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets widgets to widgets group
+									via custom filter function</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>func: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getwidgetbyid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Widget<wbr>ById</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Widget<wbr>ById<span class="tsd-signature-symbol">(</span>widgetId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:43</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>gets widget by id</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>widgetId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>widget | null</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="one" class="tsd-anchor"></a>
+					<h3>one</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">one<span class="tsd-signature-symbol">(</span>widgetId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:53</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets one widget to widgets group</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>widgetId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="some" class="tsd-anchor"></a>
+					<h3>some</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">some<span class="tsd-signature-symbol">(</span>widgetsId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:64</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets some widgets to widgets group</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>widgetsId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="update" class="tsd-anchor"></a>
+					<h3>update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:122</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>update datasource of the previous selected widgets</p>
+								</div>
+								<p>example:</p>
+								<pre><code><span class="hljs-selector-tag">layoutBuilder</span><span class="hljs-selector-class">.dataSource</span>
+ <span class="hljs-selector-class">.one</span>(<span class="hljs-string">'test'</span>) <span class="hljs-comment">// selects widget first</span>
+ <span class="hljs-selector-class">.update</span>({<span class="hljs-attribute">value</span>: <span class="hljs-string">'hello world!'</span>}) <span class="hljs-comment">// update selected widget datasource</span>
+
+<span class="hljs-selector-tag">layoutBuilder</span><span class="hljs-selector-class">.dataSource</span>
+ <span class="hljs-selector-class">.some</span>([<span class="hljs-string">'test1'</span>, <span class="hljs-string">'test2'</span>]) <span class="hljs-comment">// selects widgets first</span>
+ <span class="hljs-selector-class">.update</span>({<span class="hljs-attribute">value</span>: <span class="hljs-string">'hello world!'</span>}) <span class="hljs-comment">// update selected widgets datasource</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updateoptions" class="tsd-anchor"></a>
+					<h3>update<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in layout-data-source.ts:153</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>update datasource &quot;options&quot; of the previous selected widgets</p>
+								</div>
+								<p>example:</p>
+								<pre><code>layoutBuilder.dataSource
+ .one(<span class="hljs-string">'test'</span>) <span class="hljs-comment">// selects widget first</span>
+ .updateOptions({ <span class="hljs-string">uppercase:</span> <span class="hljs-literal">true</span> }) <span class="hljs-comment">// update selected widget datasource options</span>
+
+layoutBuilder.dataSource
+ .some([<span class="hljs-string">'test1'</span>, <span class="hljs-string">'test2'</span>]) <span class="hljs-comment">// selects widgets first</span>
+ .updateOptions({ <span class="hljs-string">uppercase:</span> <span class="hljs-literal">true</span> }) <span class="hljs-comment">// update selected widgets datasource options</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>LayoutDataSource</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>instance</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_api_request_.html">"api-<wbr>request"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_data_source_.html">"data-<wbr>source"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_event_handler_.html">"event-<wbr>handler"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_interfaces_.html">"interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_layout_builder_.html">"layout-<wbr>builder"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_layout_data_source_.html">"layout-<wbr>data-<wbr>source"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_test_model_.html">"test-<wbr>model"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_layout_data_source_.layoutdatasource.html" class="tsd-kind-icon">Layout<wbr>Data<wbr>Source</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_layout_data_source_.layoutdatasource.html#selectedwidgets" class="tsd-kind-icon">selected<wbr>Widgets</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#widgets" class="tsd-kind-icon">widgets</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#all" class="tsd-kind-icon">all</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#exclude" class="tsd-kind-icon">exclude</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#filter" class="tsd-kind-icon">filter</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_layout_data_source_.layoutdatasource.html#getwidgetbyid" class="tsd-kind-icon">get<wbr>Widget<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#one" class="tsd-kind-icon">one</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#some" class="tsd-kind-icon">some</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#update" class="tsd-kind-icon">update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_layout_data_source_.layoutdatasource.html#updateoptions" class="tsd-kind-icon">update<wbr>Options</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
