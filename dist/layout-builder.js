@@ -1,4 +1,39 @@
 import { Subject, merge } from "rxjs";
+/**
+ * base class to build components datasource/eventhandlers connections
+ * on app layouts
+ *
+ * example:
+ * ```
+ * export class LayoutComponent implements OnInit {
+ *   public lb = new LayoutBuilder('layout-id');
+ *   private widgets = [
+ *     { id: 'test1' },
+ *     { id: 'test2' },
+ *   ];
+ *
+ *   constructor(){}
+ *
+ *   ngOnInit(){
+ *     // on ready
+ *     this.lb.ready$.subscribe(() => {
+ *       this.lb.eventHandler.emitInner('init');
+ *     });
+ *
+ *     this.lb.init({
+ *       widgetsConfig: this.widgets,
+ *       widgetsDataSources: DS, // components datasource classes
+ *       widgetsEventHandlers: EH, // components eventhandler classes
+ *       dataSource: new LayoutDS(), // layout datasource
+ *       eventHandler: new LayoutEH(), // layout eventhandler
+ *     });
+ *   }
+ * }
+ * ```
+ *
+ * @export
+ * @class LayoutBuilder
+ */
 var LayoutBuilder = /** @class */ (function () {
     function LayoutBuilder(layoutId) {
         this.widgets = {};
@@ -7,6 +42,19 @@ var LayoutBuilder = /** @class */ (function () {
         this.ready$ = new Subject();
         this.id = layoutId;
     }
+    /**
+     * inits connection build
+     *
+     * @param {// types
+     *     {
+     *       widgetsConfig: IWidgetConfig[],
+     *       widgetsDataSources: any,
+     *       widgetsEventHandlers: any,
+     *       dataSource?: any,
+     *       eventHandler?: IEventHandler
+     *     }} {widgetsConfig, widgetsDataSources, widgetsEventHandlers, dataSource, eventHandler}
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.init = function (_a) {
         var _this = this;
         var widgetsConfig = _a.widgetsConfig, widgetsDataSources = _a.widgetsDataSources, widgetsEventHandlers = _a.widgetsEventHandlers, dataSource = _a.dataSource, eventHandler = _a.eventHandler;
@@ -49,6 +97,12 @@ var LayoutBuilder = /** @class */ (function () {
         // emit ready
         this.ready$.next();
     };
+    /**
+     * connect layout events to component eventhandler
+     *
+     * @private
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.attachLayoutEvents = function () {
         var _this = this;
         var outs$ = Object.keys(this.widgets)
@@ -58,13 +112,36 @@ var LayoutBuilder = /** @class */ (function () {
         this.eventHandler.outerEvents$ = merge.apply(void 0, outs$);
         this.eventHandler.listen();
     };
+    /**
+     * connect widget events to layout eventhandler
+     *
+     * @private
+     * @param {*} widgetEventHandler
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.attachWidgetEvents = function (widgetEventHandler) {
         widgetEventHandler.outerEvents$ = this.eventHandler.out$;
         widgetEventHandler.listen();
     };
+    /**
+     *  gets widget id
+     *
+     * @private
+     * @param {*} widget widget config
+     * @returns {string} widgetId
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.getWidgetId = function (widget) {
         return widget.id;
     };
+    /**
+     * gets widget datasource
+     *
+     * @private
+     * @param {*} widget
+     * @returns {IDataSource | null}
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.getWidgetDataSource = function (widget) {
         var dataSource;
         if (widget.dataSource) {
@@ -76,6 +153,14 @@ var LayoutBuilder = /** @class */ (function () {
         }
         return dataSource;
     };
+    /**
+     * gets widget eventhandler
+     *
+     * @private
+     * @param {*} widget
+     * @returns {IEventHandler | null}
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.getWidgetEventHandler = function (widget) {
         var eventHandler;
         if (widget.eventHandler) {
@@ -87,13 +172,36 @@ var LayoutBuilder = /** @class */ (function () {
         }
         return eventHandler;
     };
+    /**
+     * gets widget class name
+     *
+     * @private
+     * @param {*} widgetId
+     * @returns {string} widget class name
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype.getWidgetBaseClass = function (widgetId) {
         var _this = this;
         return widgetId.split('-').map(function (word) { return _this._ucFirst(word); }).join('');
     };
+    /**
+     * uppercase first char utility
+     *
+     * @private
+     * @param {string} str
+     * @returns {string}
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype._ucFirst = function (str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
+    /**
+     * triggered on ready$
+     * for internal functionality
+     *
+     * @private
+     * @memberof LayoutBuilder
+     */
     LayoutBuilder.prototype._onReady = function () {
         var _this = this;
         // trigger update for widgets
