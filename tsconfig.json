@@ -15,11 +15,6 @@
       "dom"
     ]
   },
-  "typedocOptions": {
-    "includes": "src",
-    "mode": "modules",
-    "out": "docs"
-  },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
