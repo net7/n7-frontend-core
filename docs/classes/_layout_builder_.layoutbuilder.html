@@ -78,28 +78,28 @@
 					<p>example:</p>
 					<pre><code><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> LayoutComponent <span class="hljs-keyword">implements</span> OnInit {
   <span class="hljs-keyword">public</span> lb = <span class="hljs-keyword">new</span> LayoutBuilder(<span class="hljs-string">'layout-id'</span>);
-   <span class="hljs-keyword">private</span> widgets = [
-     { id: <span class="hljs-string">'test1'</span> },
-     { id: <span class="hljs-string">'test2'</span> },
-   ];
+  <span class="hljs-keyword">private</span> widgets = [
+    { id: <span class="hljs-string">'test1'</span> },
+    { id: <span class="hljs-string">'test2'</span> },
+  ];
 
-   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>){}
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>){}
 
-   ngOnInit(){
-     <span class="hljs-comment">// on ready</span>
-     <span class="hljs-keyword">this</span>.lb.ready$.subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-       <span class="hljs-keyword">this</span>.lb.eventHandler.emitInner(<span class="hljs-string">'init'</span>);
-     });
+  ngOnInit(){
+    <span class="hljs-comment">// on ready</span>
+    <span class="hljs-keyword">this</span>.lb.ready$.subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      <span class="hljs-keyword">this</span>.lb.eventHandler.emitInner(<span class="hljs-string">'init'</span>);
+    });
 
-     <span class="hljs-keyword">this</span>.lb.init({
-       widgetsConfig: <span class="hljs-keyword">this</span>.widgets,
-       widgetsDataSources: DS, <span class="hljs-comment">// components datasource classes</span>
-       widgetsEventHandlers: EH, <span class="hljs-comment">// components eventhandler classes</span>
-       dataSource: <span class="hljs-keyword">new</span> LayoutDS(), <span class="hljs-comment">// layout datasource</span>
-       eventHandler: <span class="hljs-keyword">new</span> LayoutEH(), <span class="hljs-comment">// layout eventhandler</span>
-     });
-   }
- }</code></pre>
+    <span class="hljs-keyword">this</span>.lb.init({
+      widgetsConfig: <span class="hljs-keyword">this</span>.widgets,
+      widgetsDataSources: DS, <span class="hljs-comment">// components datasource classes</span>
+      widgetsEventHandlers: EH, <span class="hljs-comment">// components eventhandler classes</span>
+      dataSource: <span class="hljs-keyword">new</span> LayoutDS(), <span class="hljs-comment">// layout datasource</span>
+      eventHandler: <span class="hljs-keyword">new</span> LayoutEH(), <span class="hljs-comment">// layout eventhandler</span>
+    });
+  }
+}</code></pre>
 					<dl class="tsd-comment-tags">
 						<dt>export</dt>
 						<dd></dd>
