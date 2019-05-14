@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "build:docs": "typedoc --out docs/ src/"
+    "docs:build": "typedoc --out docs/ src/"
   },
   "author": "",
   "license": "ISC",
