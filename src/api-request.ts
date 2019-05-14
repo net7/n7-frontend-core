@@ -19,27 +19,39 @@ import { IProvider } from './interfaces';
  * @implements {IProvider}
  */
 export class ApiRequest implements IProvider {
+  /** Internal implementation detail, do not use directly. */
+  _options: any;
+  /** Internal implementation detail, do not use directly. */
+  _output: any = null;
   out$: Subject<any> = new Subject();
-  output: any = null;
-  options: any;
 
   private request$: Observable<any>;
   private called: boolean = false;
 
   /**
    * Creates an instance of ApiRequest.
+   * 
+   * receives an http request as parameter, see more on: 
+   * [angular http](https://angular.io/guide/http)
+   * ```
+   * new ApiRequest(
+   *  this.http.get("https://jsonplaceholder.typicode.com/posts")
+   * );
+   * ```
+   * 
    * @param {Observable<any>} request
    * @param {*} [options] request options
    * @memberof ApiRequest
    */
   constructor(request: Observable<any>, options?){
     this.request$ = request;
-    this.options = options;
+    this._options = options;
   }
 
   /**
    * runs request
-   * @returns {void}
+   * subscribes to request$ Observable (http)
+   * 
    * @memberof ApiRequest
    */
   run(): void {
@@ -60,13 +72,13 @@ export class ApiRequest implements IProvider {
       )
       .subscribe((response) => {
         try{
-          this.output = response;
+          this._output = response;
         } catch(err){
           console.log(err);
           this.out$.error(err);
         }
         // signal
-        this.out$.next(this.output);
+        this.out$.next(this._output);
         this.out$.complete();
       });
   }
@@ -77,6 +89,6 @@ export class ApiRequest implements IProvider {
    */
   reset(): void {
     this.called = false;
-    this.output = null;
+    this._output = null;
   }
 }

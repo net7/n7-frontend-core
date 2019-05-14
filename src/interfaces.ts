@@ -22,9 +22,9 @@ export interface IEventHandler {
 }
 
 export interface IProvider {
+  _output: any;
+  _options?: any;
   out$: Subject<any>;
-  output: any;
-  options?: any;
   run(): any;
   reset(): any;
 }
