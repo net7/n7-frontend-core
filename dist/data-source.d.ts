@@ -5,7 +5,7 @@ import { IDataSource } from "./interfaces";
  *
  * implementation example:
  * ```
- * import { DataSource } from '@dataviz/core';
+ * import { DataSource } from '@n7-frontend/core';
  *
  * export class TestDS extends DataSource {
  *   protected transform(data) {

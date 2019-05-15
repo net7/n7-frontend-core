@@ -1,5 +1,5 @@
 {
-  "name": "@dataviz/core",
+  "name": "@n7-frontend/core",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",

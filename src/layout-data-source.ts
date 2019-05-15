@@ -3,7 +3,7 @@
  * 
  * implementation example:
  * ```
- * import { LayoutDataSource, ApiRequest } from '@dataviz/core';
+ * import { LayoutDataSource, ApiRequest } from '@n7-frontend/core';
  * 
  * export class LayoutDS extends LayoutDataSource {
  *   private http: any;

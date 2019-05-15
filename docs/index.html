@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@dataviz/core</title>
+	<title>@n7-frontend/core</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@dataviz/core</a>
+					<a href="index.html" class="title">@n7-frontend/core</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @dataviz/core</h1>
+			<h1> @n7-frontend/core</h1>
 		</div>
 	</div>
 </header>
@@ -64,41 +64,6 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p>questa cartella contiene le repo separate per il progetto dataviz lato FE</p>
-				<h1 id="dataviz-core">dataviz-core</h1>
-				<p>file core (layout builder, abstract datasource, abstract eventhandler, ecc). le dipendenze sono typescript e rxjs</p>
-				<h1 id="dataviz-components">dataviz-components</h1>
-				<p>componenti/widgets &quot;alla angular&quot;. le dipendenze sono quelle di angular, settati da <code>ng new &lt;project-name&gt;</code> </p>
-				<p>alcuni riferimenti per creare su angular una libreria di componenti da riutilizzare in altri progetti:</p>
-				<ul>
-					<li><a href="https://github.com/angular/angular-cli/wiki/stories-create-library"><code>ng generate library</code>: link</a></li>
-					<li><a href="https://stackoverflow.com/questions/15806241how-to-specify-local-modules-as-npm-package-dependencies">npm local dependencies: link</a></li>
-				</ul>
-				<p>nelle local dependencies è importante per <code>ng build --prod</code> che il nome della libreria nel <code>package.json</code> sia uguale a quello del dependencies. un esempio qui: </p>
-				<pre><code class="language-js"><span class="hljs-comment">// &lt;dataviz-components&gt;/projects/dv-components-lib/package.json</span>
-{
-  <span class="hljs-comment">// ...</span>
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"@dataviz/components"</span>,
-  <span class="hljs-comment">// ...</span>
-}
-</code></pre>
-				<pre><code class="language-js"><span class="hljs-comment">// &lt;dataviz-core&gt;/package.json</span>
-{
-  <span class="hljs-comment">// ...</span>
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"@dataviz/core"</span>,
-  <span class="hljs-comment">// ...</span>
-}
-</code></pre>
-				<pre><code class="language-js"><span class="hljs-comment">// &lt;dataviz-sandbox&gt;/package.json</span>
-{
-  <span class="hljs-comment">// ...</span>
-  <span class="hljs-string">"@dataviz/core"</span>: <span class="hljs-string">"file:../dataviz-core"</span>,
-  <span class="hljs-string">"@dataviz/components"</span>: <span class="hljs-string">"file:../dataviz-components/dist/dv-components-lib"</span>,
-  <span class="hljs-comment">// ...</span>
-}
-</code></pre>
-				<h1 id="dataviz-sandbox">dataviz-sandbox</h1>
-				<p>angular app per testare i pregetti <code>@dataviz/core</code> e <code>@dataviz/components</code></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
