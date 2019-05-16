@@ -4,22 +4,33 @@ import { IEventHandler } from "./interfaces";
 /**
  * base abstract class for components eventhandlers
  * 
+ * EventHandlers "handle" the components / layouts 
+ * custom events and native events (click, scroll, mouseenter, etc...)
+ * 
+ * An EventHandler is connected with the components / layouts DataSource
+ * and can trigger the DataSource public methods
+ * 
+ * EventHandlers can emit outer events (targeting outer listeners) 
+ * 
  * implementation example:
- * ```
+ * ```ts
  * export class TestEH extends EventHandler {
  *   public listen() {
- *     // listen to inner (widget) events
+ *     // listen to inner events
  *     this.innerEvents$.subscribe(event => {
  *       switch(event.type){
  *         case 'test.click': 
- *           console.log(event);
+ *           // can trigger DataSource public methods
+ *           this.dataSource.onClick(event); 
+ *           // can emit outer events (to outer)
+ *           this.emitOuter('test.click', event.payload); 
  *           break;
  *         default: 
  *           break;
  *       }
  *     });
  *  
- *     // listen to outer (layout) events
+ *     // listen to outer events
  *     this.outerEvents$.subscribe(event => {
  *       switch(event.type){
  *         case 'layout.click': 
@@ -47,7 +58,21 @@ export abstract class EventHandler implements IEventHandler {
 
 
   /**
-   * events listeners trigger
+   * listeners trigger, an implementation example:
+   * 
+   * ```ts
+   * public listen() {
+   *   // listen to inner events
+   *   this.innerEvents$.subscribe(event => {
+   *     // ...
+   *   });
+   *
+   *   // listen to outer events
+   *   this.outerEvents$.subscribe(event => {
+   *      // ...
+   *   });
+   * }
+   * ```
    *
    * @abstract
    * @memberof EventHandler
@@ -55,7 +80,7 @@ export abstract class EventHandler implements IEventHandler {
   public abstract listen(): void;
 
   /**
-   * emits inner events
+   * emits inner events, targeting inner listener
    *
    * @param {string} type
    * @param {*} payload
@@ -66,7 +91,7 @@ export abstract class EventHandler implements IEventHandler {
   }
 
   /**
-   * emits outer events
+   * emits outer events, targeting outer listener(s)
    *
    * @param {string} type
    * @param {*} payload
@@ -80,7 +105,7 @@ export abstract class EventHandler implements IEventHandler {
    * generic emitter
    *
    * @private
-   * @param {Subject<any>} context$
+   * @param {Subject<any>} context$ inner or outer
    * @param {string} type
    * @param {*} payload
    * @memberof EventHandler
@@ -96,7 +121,7 @@ export abstract class EventHandler implements IEventHandler {
   /**
    * to debug events 
    *
-   * @memberof EventHandler
+   * (to be tested/completed)
    * @beta
    */
   public debug(){
@@ -107,12 +132,15 @@ export abstract class EventHandler implements IEventHandler {
   /**
    * console log internal utility
    * used by debug()
+   * 
+   * see: {@link EventHandler.debug}
    *
    * @private
    * @param {string} context inner/outer
    * @param {string} type event type
    * @param {*} payload event payload
-   * @memberof EventHandler
+   * 
+   * (to be tested/completed)
    * @beta
    */
   private log(context: string, type: string, payload: any){

@@ -4,8 +4,11 @@ import { IDataSource } from "./interfaces";
 /**
  * base abstract class for components datasources
  * 
- * implementation example:
- * ```
+ * Datasources have the logic to transform external data 
+ * in components/widgets input data. 
+ * 
+ * class implementation example:
+ * ```ts
  * import { DataSource } from '@n7-frontend/core';
  *
  * export class TestDS extends DataSource {
@@ -13,7 +16,17 @@ import { IDataSource } from "./interfaces";
  *     return data.value;
  *   }
  * }
- * ``` 
+ * ```
+ *  
+ * An angular layout example:
+ * 
+ * - `lb` is the layout's LayoutBuilder
+ * - `ds` is the widget's DataSource
+ * - `out$` is the Datasource async output
+ * 
+ * ```html
+ * <test-component [data]="lb.widgets['test'].ds.out$ | async"></test-component>
+ * ```
  * 
  * @abstract
  * @class DataSource
@@ -36,7 +49,7 @@ export abstract class DataSource implements IDataSource {
   }
 
   /**
-   * transforms external input data to internal output
+   * transforms external input data in internal output,
    * to be passed as data to component(s)
    * 
    * @protected
@@ -49,7 +62,7 @@ export abstract class DataSource implements IDataSource {
   protected abstract transform(input, options?): any;
 
   /**
-   * runs datasource 
+   * runs datasource and updates `out$` stream
    * 
    * @param {*} [inputData] external input data
    * @memberof DataSource
@@ -67,10 +80,10 @@ export abstract class DataSource implements IDataSource {
   }
 
   /**
-   * updates datasource 
+   * updates datasource with new data and/or new options
    * 
    * @param {*} [newData] new/updated external input data
-   * @param {*} [newOptions]
+   * @param {*} [newOptions] new/updated options
    * @memberof DataSource
    */
   update(newData?, newOptions?) {
@@ -83,6 +96,8 @@ export abstract class DataSource implements IDataSource {
   /**
    * handles onError exception
    * used by run() method
+   * 
+   * see: {@link DataSource.run}
    *
    * @protected
    * @param {*} error

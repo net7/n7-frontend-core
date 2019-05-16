@@ -2,24 +2,16 @@
  * base abstract class for layout datasources 
  * 
  * implementation example:
- * ```
+ * ```ts
  * import { LayoutDataSource, ApiRequest } from '@n7-frontend/core';
  * 
  * export class LayoutDS extends LayoutDataSource {
  *   private http: any;
  * 
  *   // custom method
- *   // can be called/triggerd by layout's eventhandler
+ *   // can be called/triggered by layout's eventhandler
  *   onInit(payload){
- *     this.http = payload.http;
- * 
- *     const request$ = new ApiRequest(
- *       <any>this.http.get("https://jsonplaceholder.typicode.com/posts")
- *     );
- * 
- *     request$.out$.subscribe(v => this.one('test').update(v));
- * 
- *     request$.run();
+ *     //...
  *   }
  * }
  * ```
@@ -45,6 +37,12 @@ export abstract class LayoutDataSource {
   }
   /**
    * sets one widget to widgets group
+   * 
+   * use example:
+   * 
+   * ```ts
+   * this.one('test').update({value: 'hello world!'});
+   * ```
    *
    * @param {string} widgetId
    * @returns instance
@@ -56,7 +54,13 @@ export abstract class LayoutDataSource {
   }
   /**
    * sets some widgets to widgets group
-   *
+   * 
+   * use example:
+   * 
+   * ```ts
+   * this.some(['test1', 'test2']).update({value: 'hello world!'});
+   * ```
+   * 
    * @param {string[]} widgetsId
    * @returns instance
    * @memberof LayoutDataSource
@@ -67,6 +71,12 @@ export abstract class LayoutDataSource {
   }
   /**
    * sets all widgets to widgets group
+   * 
+   * use example:
+   * 
+   * ```ts
+   * this.all().update({value: 'hello world!'});
+   * ```
    *
    * @returns instance
    * @memberof LayoutDataSource
@@ -77,7 +87,14 @@ export abstract class LayoutDataSource {
   }
   /**
    * sets all widgets to widgets group
-   * excluding the ones on widgetsId 
+   * excluding the ones on `widgetsId` array param
+   * 
+   * use example:
+   * 
+   * ```ts
+   * // updates all except test3 & test4
+   * this.exclude(['test3', 'test4']).update({value: 'hello world!'});
+   * ```
    *
    * @param {string[]} widgetsId widgets to exclude
    * @returns instance
@@ -90,7 +107,15 @@ export abstract class LayoutDataSource {
   }
   /**
    * sets widgets to widgets group
-   * via custom filter function
+   * via custom array filter function
+   * 
+   * use example:
+   * 
+   * ```ts
+   * // updates all widgets that contains the string "test"
+   * // in the widgetId string
+   * this.filter((widgetId) => widgetId.indexOf('test') !== -1).update({value: 'hello world!'});
+   * ```
    *
    * @param {*} func
    * @returns instance
@@ -102,18 +127,14 @@ export abstract class LayoutDataSource {
     return this;
   }
   /**
-   * update datasource of the previous selected widgets
+   * update each DataSource of the previous selected widgets
    * 
-   * example: 
-   * ```
-   * layoutBuilder.dataSource
-   *  .one('test') // selects widget first
-   *  .update({value: 'hello world!'}) // update selected widget datasource
-   * 
-   * layoutBuilder.dataSource
-   *  .some(['test1', 'test2']) // selects widgets first
-   *  .update({value: 'hello world!'}) // update selected widgets datasource
-   * ```
+   * for more info see:
+   * - {@link LayoutDataSource.one}
+   * - {@link LayoutDataSource.some}
+   * - {@link LayoutDataSource.all}
+   * - {@link LayoutDataSource.exclude}
+   * - {@link LayoutDataSource.filter}
    *
    * @param {*} data
    * @returns instance
@@ -133,17 +154,19 @@ export abstract class LayoutDataSource {
   }
 
   /**
-   * update datasource "options" of the previous selected widgets
+   * update each DataSource "options" of the previous selected widgets
    * 
-   * example: 
-   * ```
-   * layoutBuilder.dataSource
-   *  .one('test') // selects widget first
-   *  .updateOptions({ uppercase: true }) // update selected widget datasource options
+   * for more info see:
+   * - {@link LayoutDataSource.one}
+   * - {@link LayoutDataSource.some}
+   * - {@link LayoutDataSource.all}
+   * - {@link LayoutDataSource.exclude}
+   * - {@link LayoutDataSource.filter}
    * 
-   * layoutBuilder.dataSource
-   *  .some(['test1', 'test2']) // selects widgets first
-   *  .updateOptions({ uppercase: true }) // update selected widgets datasource options
+   * use example:
+   * 
+   * ```ts
+   * this.one('test').updateOptions({ uppercase: true });
    * ```
    *
    * @param {*} options

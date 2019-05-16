@@ -7,7 +7,7 @@ import { IProvider } from './interfaces';
  * base class for making API requests 
  * 
  * example:
- * ```
+ * ```ts
  *  const request$ = new ApiRequest(
  *     this.http.get("https://jsonplaceholder.typicode.com/posts")
  *  );
@@ -33,14 +33,14 @@ export class ApiRequest implements IProvider {
    * 
    * receives an http request as parameter, see more on: 
    * [angular http](https://angular.io/guide/http)
-   * ```
+   * ```ts
    * new ApiRequest(
    *  this.http.get("https://jsonplaceholder.typicode.com/posts")
    * );
    * ```
    * 
-   * @param {Observable<any>} request
-   * @param {*} [options] request options
+   * @param {Observable<any>} request Observable
+   * @param {*} [options] aditional request options
    * @memberof ApiRequest
    */
   constructor(request: Observable<any>, options?){
@@ -49,8 +49,13 @@ export class ApiRequest implements IProvider {
   }
 
   /**
-   * runs request
-   * subscribes to request$ Observable (http)
+   * runs request updating the `out$` stream
+   * 
+   * ```ts
+   * // ...
+   * request$.out$.subscribe(response => console.log(response)); // listen to out$ changes
+   * request$.run(); // runs request
+   * ```
    * 
    * @memberof ApiRequest
    */
@@ -85,7 +90,11 @@ export class ApiRequest implements IProvider {
 
   /**
    * resets / clear request output
-   * @memberof ApiRequest
+   * 
+   * useful for re-running the same request instance
+   * 
+   * (to be tested/completed)
+   * @beta
    */
   reset(): void {
     this.called = false;
