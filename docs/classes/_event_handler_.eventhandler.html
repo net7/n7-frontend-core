@@ -74,21 +74,29 @@
 					<div class="lead">
 						<p>base abstract class for components eventhandlers</p>
 					</div>
+					<p>EventHandlers &quot;handle&quot; the components / layouts
+					custom events and native events (click, scroll, mouseenter, etc...)</p>
+					<p>An EventHandler is connected with the components / layouts DataSource
+					and can trigger the DataSource public methods</p>
+					<p>EventHandlers can emit outer events (targeting outer listeners)</p>
 					<p>implementation example:</p>
-					<pre><code><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestEH</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventHandler</span> </span>{
-  public listen() {
-    <span class="hljs-comment">// listen to inner (widget) events</span>
+					<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TestEH <span class="hljs-keyword">extends</span> EventHandler {
+  <span class="hljs-keyword">public</span> listen() {
+    <span class="hljs-comment">// listen to inner events</span>
     <span class="hljs-keyword">this</span>.innerEvents$.subscribe(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
       <span class="hljs-keyword">switch</span>(event.type){
         <span class="hljs-keyword">case</span> <span class="hljs-string">'test.click'</span>:
-          <span class="hljs-built_in">console</span>.log(event);
+          <span class="hljs-comment">// can trigger DataSource public methods</span>
+          <span class="hljs-keyword">this</span>.dataSource.onClick(event);
+          <span class="hljs-comment">// can emit outer events (to outer)</span>
+          <span class="hljs-keyword">this</span>.emitOuter(<span class="hljs-string">'test.click'</span>, event.payload);
           <span class="hljs-keyword">break</span>;
         <span class="hljs-keyword">default</span>:
           <span class="hljs-keyword">break</span>;
       }
     });
 
-    <span class="hljs-comment">// listen to outer (layout) events</span>
+    <span class="hljs-comment">// listen to outer events</span>
     <span class="hljs-keyword">this</span>.outerEvents$.subscribe(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
       <span class="hljs-keyword">switch</span>(event.type){
         <span class="hljs-keyword">case</span> <span class="hljs-string">'layout.click'</span>:
@@ -165,7 +173,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#datasource">dataSource</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L45">event-handler.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L56">event-handler.ts:56</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,7 +184,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#hostid">hostId</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L46">event-handler.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L57">event-handler.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -187,7 +195,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#innerevents_">innerEvents$</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L42">event-handler.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L53">event-handler.ts:53</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -198,7 +206,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#out_">out$</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L44">event-handler.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L55">event-handler.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -209,7 +217,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#outerevents_">outerEvents$</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L43">event-handler.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L54">event-handler.ts:54</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -227,17 +235,15 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#debug">debug</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L102">event-handler.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L127">event-handler.ts:127</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>to debug events</p>
 								</div>
+								<p>(to be tested/completed)</p>
 								<dl class="tsd-comment-tags">
-									<dt>memberof</dt>
-									<dd><p>EventHandler</p>
-									</dd>
 									<dt>beta</dt>
 									<dd></dd>
 								</dl>
@@ -256,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L88">event-handler.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L113">event-handler.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -273,6 +279,9 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context$: <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>inner or outer</p>
+									</div>
 								</li>
 								<li>
 									<h5>type: <span class="tsd-signature-type">string</span></h5>
@@ -296,12 +305,12 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#emitinner">emitInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L64">event-handler.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L89">event-handler.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>emits inner events</p>
+									<p>emits inner events, targeting inner listener</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>memberof</dt>
@@ -333,12 +342,12 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#emitouter">emitOuter</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L75">event-handler.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L100">event-handler.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>emits outer events</p>
+									<p>emits outer events, targeting outer listener(s)</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>memberof</dt>
@@ -370,13 +379,24 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_interfaces_.ieventhandler.html">IEventHandler</a>.<a href="../interfaces/_interfaces_.ieventhandler.html#listen">listen</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L55">event-handler.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L80">event-handler.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>events listeners trigger</p>
+									<p>listeners trigger, an implementation example:</p>
 								</div>
+								<pre><code class="language-ts"><span class="hljs-keyword">public</span> listen() {
+  <span class="hljs-comment">// listen to inner events</span>
+  <span class="hljs-keyword">this</span>.innerEvents$.subscribe(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+    <span class="hljs-comment">// ...</span>
+  });
+
+  <span class="hljs-comment">// listen to outer events</span>
+  <span class="hljs-keyword">this</span>.outerEvents$.subscribe(<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+     <span class="hljs-comment">// ...</span>
+  });
+}</code></pre>
 								<dl class="tsd-comment-tags">
 									<dt>abstract</dt>
 									<dd></dd>
@@ -399,7 +419,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/3322c09/src/event-handler.ts#L118">event-handler.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/net7/n7-frontend-core/blob/f829d4d/src/event-handler.ts#L146">event-handler.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -407,10 +427,8 @@
 									<p>console log internal utility
 									used by debug()</p>
 								</div>
+								<p>see: <a href="_event_handler_.eventhandler.html#debug">EventHandler.debug</a></p>
 								<dl class="tsd-comment-tags">
-									<dt>memberof</dt>
-									<dd><p>EventHandler</p>
-									</dd>
 									<dt>beta</dt>
 									<dd></dd>
 								</dl>
@@ -433,6 +451,7 @@
 									<h5>payload: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>event payload</p>
+										<p>(to be tested/completed)</p>
 									</div>
 								</li>
 							</ul>
