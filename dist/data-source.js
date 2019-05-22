@@ -2,8 +2,11 @@ import { BehaviorSubject } from "rxjs";
 /**
  * base abstract class for components datasources
  *
- * implementation example:
- * ```
+ * Datasources have the logic to transform external data
+ * in components/widgets input data.
+ *
+ * class implementation example:
+ * ```ts
  * import { DataSource } from '@n7-frontend/core';
  *
  * export class TestDS extends DataSource {
@@ -11,6 +14,16 @@ import { BehaviorSubject } from "rxjs";
  *     return data.value;
  *   }
  * }
+ * ```
+ *
+ * An angular layout example:
+ *
+ * - `lb` is the layout's LayoutBuilder
+ * - `ds` is the widget's DataSource
+ * - `out$` is the Datasource async output
+ *
+ * ```html
+ * <test-component [data]="lb.widgets['test'].ds.out$ | async"></test-component>
  * ```
  *
  * @abstract
@@ -32,7 +45,7 @@ var DataSource = /** @class */ (function () {
         this.options = options || {};
     }
     /**
-     * runs datasource
+     * runs datasource and updates `out$` stream
      *
      * @param {*} [inputData] external input data
      * @memberof DataSource
@@ -50,10 +63,10 @@ var DataSource = /** @class */ (function () {
         }
     };
     /**
-     * updates datasource
+     * updates datasource with new data and/or new options
      *
      * @param {*} [newData] new/updated external input data
-     * @param {*} [newOptions]
+     * @param {*} [newOptions] new/updated options
      * @memberof DataSource
      */
     DataSource.prototype.update = function (newData, newOptions) {
@@ -65,6 +78,8 @@ var DataSource = /** @class */ (function () {
     /**
      * handles onError exception
      * used by run() method
+     *
+     * see: {@link DataSource.run}
      *
      * @protected
      * @param {*} error

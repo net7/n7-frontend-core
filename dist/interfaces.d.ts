@@ -19,9 +19,9 @@ export interface IEventHandler {
     emitOuter(type: string, payload?: any): any;
 }
 export interface IProvider {
+    _output: any;
+    _options?: any;
     out$: Subject<any>;
-    output: any;
-    options?: any;
     run(): any;
     reset(): any;
 }

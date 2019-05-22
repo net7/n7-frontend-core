@@ -2,22 +2,33 @@ import { Subject } from "rxjs";
 /**
  * base abstract class for components eventhandlers
  *
+ * EventHandlers "handle" the components / layouts
+ * custom events and native events (click, scroll, mouseenter, etc...)
+ *
+ * An EventHandler is connected with the components / layouts DataSource
+ * and can trigger the DataSource public methods
+ *
+ * EventHandlers can emit outer events (targeting outer listeners)
+ *
  * implementation example:
- * ```
+ * ```ts
  * export class TestEH extends EventHandler {
  *   public listen() {
- *     // listen to inner (widget) events
+ *     // listen to inner events
  *     this.innerEvents$.subscribe(event => {
  *       switch(event.type){
  *         case 'test.click':
- *           console.log(event);
+ *           // can trigger DataSource public methods
+ *           this.dataSource.onClick(event);
+ *           // can emit outer events (to outer)
+ *           this.emitOuter('test.click', event.payload);
  *           break;
  *         default:
  *           break;
  *       }
  *     });
  *
- *     // listen to outer (layout) events
+ *     // listen to outer events
  *     this.outerEvents$.subscribe(event => {
  *       switch(event.type){
  *         case 'layout.click':
@@ -42,7 +53,7 @@ var EventHandler = /** @class */ (function () {
         this.out$ = new Subject();
     }
     /**
-     * emits inner events
+     * emits inner events, targeting inner listener
      *
      * @param {string} type
      * @param {*} payload
@@ -52,7 +63,7 @@ var EventHandler = /** @class */ (function () {
         this.emit(this.innerEvents$, type, payload);
     };
     /**
-     * emits outer events
+     * emits outer events, targeting outer listener(s)
      *
      * @param {string} type
      * @param {*} payload
@@ -65,7 +76,7 @@ var EventHandler = /** @class */ (function () {
      * generic emitter
      *
      * @private
-     * @param {Subject<any>} context$
+     * @param {Subject<any>} context$ inner or outer
      * @param {string} type
      * @param {*} payload
      * @memberof EventHandler
@@ -80,7 +91,7 @@ var EventHandler = /** @class */ (function () {
     /**
      * to debug events
      *
-     * @memberof EventHandler
+     * (to be tested/completed)
      * @beta
      */
     EventHandler.prototype.debug = function () {
@@ -98,11 +109,14 @@ var EventHandler = /** @class */ (function () {
      * console log internal utility
      * used by debug()
      *
+     * see: {@link EventHandler.debug}
+     *
      * @private
      * @param {string} context inner/outer
      * @param {string} type event type
      * @param {*} payload event payload
-     * @memberof EventHandler
+     *
+     * (to be tested/completed)
      * @beta
      */
     EventHandler.prototype.log = function (context, type, payload) {

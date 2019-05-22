@@ -4,7 +4,7 @@ import { Subject, merge } from "rxjs";
  * on app layouts
  *
  * example:
- * ```
+ * ```ts
  * export class LayoutComponent implements OnInit {
  *   public lb = new LayoutBuilder('layout-id');
  *   private widgets = [
@@ -17,7 +17,10 @@ import { Subject, merge } from "rxjs";
  *   ngOnInit(){
  *     // on ready
  *     this.lb.ready$.subscribe(() => {
- *       this.lb.eventHandler.emitInner('init');
+ *       // on ready can emit inner events
+ *       // useful for passing aditional layout parameters
+ *       // to layout EventHandler / DataSource
+ *       this.lb.eventHandler.emitInner('init', {'hello': 'world'});
  *     });
  *
  *     this.lb.init({
@@ -43,7 +46,10 @@ var LayoutBuilder = /** @class */ (function () {
         this.id = layoutId;
     }
     /**
-     * inits connection build
+     * inits connection build on:
+     *
+     * - each component/widget with EventHandler/DataSource
+     * - layout internal EventHandler/DataSource
      *
      * @param {// types
      *     {
@@ -98,7 +104,7 @@ var LayoutBuilder = /** @class */ (function () {
         this.ready$.next();
     };
     /**
-     * connect layout events to component eventhandler
+     * connect component/widget events to layout eventhandler
      *
      * @private
      * @memberof LayoutBuilder
@@ -113,7 +119,7 @@ var LayoutBuilder = /** @class */ (function () {
         this.eventHandler.listen();
     };
     /**
-     * connect widget events to layout eventhandler
+     * connect layout events to component/widget eventhandler
      *
      * @private
      * @param {*} widgetEventHandler
@@ -135,7 +141,7 @@ var LayoutBuilder = /** @class */ (function () {
         return widget.id;
     };
     /**
-     * gets widget datasource
+     * gets widget DataSource
      *
      * @private
      * @param {*} widget
@@ -154,7 +160,7 @@ var LayoutBuilder = /** @class */ (function () {
         return dataSource;
     };
     /**
-     * gets widget eventhandler
+     * gets widget EventHandler
      *
      * @private
      * @param {*} widget
@@ -185,7 +191,7 @@ var LayoutBuilder = /** @class */ (function () {
         return widgetId.split('-').map(function (word) { return _this._ucFirst(word); }).join('');
     };
     /**
-     * uppercase first char utility
+     * uppercase first char internal utility
      *
      * @private
      * @param {string} str

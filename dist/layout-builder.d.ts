@@ -5,7 +5,7 @@ import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
  * on app layouts
  *
  * example:
- * ```
+ * ```ts
  * export class LayoutComponent implements OnInit {
  *   public lb = new LayoutBuilder('layout-id');
  *   private widgets = [
@@ -18,7 +18,10 @@ import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
  *   ngOnInit(){
  *     // on ready
  *     this.lb.ready$.subscribe(() => {
- *       this.lb.eventHandler.emitInner('init');
+ *       // on ready can emit inner events
+ *       // useful for passing aditional layout parameters
+ *       // to layout EventHandler / DataSource
+ *       this.lb.eventHandler.emitInner('init', {'hello': 'world'});
  *     });
  *
  *     this.lb.init({
@@ -47,7 +50,10 @@ export declare class LayoutBuilder {
     private widgetsEventHandlers;
     constructor(layoutId: string);
     /**
-     * inits connection build
+     * inits connection build on:
+     *
+     * - each component/widget with EventHandler/DataSource
+     * - layout internal EventHandler/DataSource
      *
      * @param {// types
      *     {
@@ -67,14 +73,14 @@ export declare class LayoutBuilder {
         eventHandler?: IEventHandler;
     }): void;
     /**
-     * connect layout events to component eventhandler
+     * connect component/widget events to layout eventhandler
      *
      * @private
      * @memberof LayoutBuilder
      */
     private attachLayoutEvents;
     /**
-     * connect widget events to layout eventhandler
+     * connect layout events to component/widget eventhandler
      *
      * @private
      * @param {*} widgetEventHandler
@@ -91,7 +97,7 @@ export declare class LayoutBuilder {
      */
     private getWidgetId;
     /**
-     * gets widget datasource
+     * gets widget DataSource
      *
      * @private
      * @param {*} widget
@@ -100,7 +106,7 @@ export declare class LayoutBuilder {
      */
     private getWidgetDataSource;
     /**
-     * gets widget eventhandler
+     * gets widget EventHandler
      *
      * @private
      * @param {*} widget
@@ -118,7 +124,7 @@ export declare class LayoutBuilder {
      */
     private getWidgetBaseClass;
     /**
-     * uppercase first char utility
+     * uppercase first char internal utility
      *
      * @private
      * @param {string} str

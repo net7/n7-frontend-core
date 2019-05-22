@@ -4,7 +4,7 @@ import { catchError } from "rxjs/operators";
  * base class for making API requests
  *
  * example:
- * ```
+ * ```ts
  *  const request$ = new ApiRequest(
  *     this.http.get("https://jsonplaceholder.typicode.com/posts")
  *  );
@@ -18,20 +18,36 @@ import { catchError } from "rxjs/operators";
 var ApiRequest = /** @class */ (function () {
     /**
      * Creates an instance of ApiRequest.
-     * @param {Observable<any>} request
-     * @param {*} [options] request options
+     *
+     * receives an http request as parameter, see more on:
+     * [angular http](https://angular.io/guide/http)
+     * ```ts
+     * new ApiRequest(
+     *  this.http.get("https://jsonplaceholder.typicode.com/posts")
+     * );
+     * ```
+     *
+     * @param {Observable<any>} request Observable
+     * @param {*} [options] aditional request options
      * @memberof ApiRequest
      */
     function ApiRequest(request, options) {
+        /** Internal implementation detail, do not use directly. */
+        this._output = null;
         this.out$ = new Subject();
-        this.output = null;
         this.called = false;
         this.request$ = request;
-        this.options = options;
+        this._options = options;
     }
     /**
-     * runs request
-     * @returns {void}
+     * runs request updating the `out$` stream
+     *
+     * ```ts
+     * // ...
+     * request$.out$.subscribe(response => console.log(response)); // listen to out$ changes
+     * request$.run(); // runs request
+     * ```
+     *
      * @memberof ApiRequest
      */
     ApiRequest.prototype.run = function () {
@@ -50,24 +66,28 @@ var ApiRequest = /** @class */ (function () {
         }))
             .subscribe(function (response) {
             try {
-                _this.output = response;
+                _this._output = response;
             }
             catch (err) {
                 console.log(err);
                 _this.out$.error(err);
             }
             // signal
-            _this.out$.next(_this.output);
+            _this.out$.next(_this._output);
             _this.out$.complete();
         });
     };
     /**
      * resets / clear request output
-     * @memberof ApiRequest
+     *
+     * useful for re-running the same request instance
+     *
+     * (to be tested/completed)
+     * @beta
      */
     ApiRequest.prototype.reset = function () {
         this.called = false;
-        this.output = null;
+        this._output = null;
     };
     return ApiRequest;
 }());

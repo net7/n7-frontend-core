@@ -4,7 +4,7 @@ import { IProvider } from './interfaces';
  * base class for making API requests
  *
  * example:
- * ```
+ * ```ts
  *  const request$ = new ApiRequest(
  *     this.http.get("https://jsonplaceholder.typicode.com/posts")
  *  );
@@ -16,27 +16,48 @@ import { IProvider } from './interfaces';
  * @implements {IProvider}
  */
 export declare class ApiRequest implements IProvider {
+    /** Internal implementation detail, do not use directly. */
+    _options: any;
+    /** Internal implementation detail, do not use directly. */
+    _output: any;
     out$: Subject<any>;
-    output: any;
-    options: any;
     private request$;
     private called;
     /**
      * Creates an instance of ApiRequest.
-     * @param {Observable<any>} request
-     * @param {*} [options] request options
+     *
+     * receives an http request as parameter, see more on:
+     * [angular http](https://angular.io/guide/http)
+     * ```ts
+     * new ApiRequest(
+     *  this.http.get("https://jsonplaceholder.typicode.com/posts")
+     * );
+     * ```
+     *
+     * @param {Observable<any>} request Observable
+     * @param {*} [options] aditional request options
      * @memberof ApiRequest
      */
     constructor(request: Observable<any>, options?: any);
     /**
-     * runs request
-     * @returns {void}
+     * runs request updating the `out$` stream
+     *
+     * ```ts
+     * // ...
+     * request$.out$.subscribe(response => console.log(response)); // listen to out$ changes
+     * request$.run(); // runs request
+     * ```
+     *
      * @memberof ApiRequest
      */
     run(): void;
     /**
      * resets / clear request output
-     * @memberof ApiRequest
+     *
+     * useful for re-running the same request instance
+     *
+     * (to be tested/completed)
+     * @beta
      */
     reset(): void;
 }
