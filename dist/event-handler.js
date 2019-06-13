@@ -125,4 +125,3 @@ var EventHandler = /** @class */ (function () {
     return EventHandler;
 }());
 export { EventHandler };
-//# sourceMappingURL=event-handler.js.map

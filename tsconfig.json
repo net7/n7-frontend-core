@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "sourceMap": true,
     "declaration": true,
     "outDir": "./dist",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
+    "strict": false,
+    "skipLibCheck": true,
+    "typeRoots": [ 
+      "node_modules/@types", 
+      "node_modules/@n7-frontend/core"
     ]
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  }
 }
