@@ -50,6 +50,7 @@ import { IEventHandler } from "./interfaces";
  * @implements {IEventHandler}
  */
 export abstract class EventHandler implements IEventHandler {
+  static globalEvents$: Subject<any> = new Subject();
   innerEvents$: Subject<any> = new Subject();
   outerEvents$: Observable<any>;
   out$: Subject<any> = new Subject();
@@ -99,6 +100,17 @@ export abstract class EventHandler implements IEventHandler {
    */
   public emitOuter(type: string, payload: any){
     this.emit(this.out$, type, payload);
+  }
+
+  /**
+   * emits global events, targeting app/any listener(s)
+   *
+   * @param {string} type
+   * @param {*} payload
+   * @memberof EventHandler
+   */
+  public emitGlobal(type: string, payload?: any){
+    EventHandler.globalEvents$.next({ type: `global.${type}`, payload });
   }
 
   /**
