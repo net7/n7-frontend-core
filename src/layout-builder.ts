@@ -117,6 +117,11 @@ export class LayoutBuilder {
       }
 
       this.widgets[id] = {id, ds, eh, emit};
+
+      // if widget has static data trigger update
+      if(widgetConfig.hasStaticData) {
+        ds.update();
+      } 
     });
 
     // attach events
@@ -126,9 +131,6 @@ export class LayoutBuilder {
     if(this.dataSource){
       this.dataSource['widgets'] = this.widgets;
     }
-
-    // on ready
-    this.ready$.subscribe(() => this._onReady());
 
     // emit ready
     this.ready$.next();
@@ -245,18 +247,5 @@ export class LayoutBuilder {
    */
   private _ucFirst(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  /**
-   * triggered on ready$
-   * for internal functionality
-   *
-   * @private
-   * @memberof LayoutBuilder
-   */
-  private _onReady(){
-    // trigger update for widgets
-    // w/initial data
-    Object.keys(this.widgets).forEach(id => this.widgets[id].ds.update());
   }
 }
