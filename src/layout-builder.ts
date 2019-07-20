@@ -113,7 +113,7 @@ export class LayoutBuilder {
         this.attachWidgetEvents(eh);
         // add datasource to eventhandler
         eh.dataSource = ds;
-        emit = (type: string, payload: any) => eh.emitInner(type, payload);
+        emit = (type: string, payload?: any) => eh.emitInner(type, payload);
       }
 
       this.widgets[id] = {id, ds, eh, emit};
