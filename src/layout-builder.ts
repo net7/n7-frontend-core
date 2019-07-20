@@ -182,11 +182,11 @@ export class LayoutBuilder {
    *
    * @private
    * @param {*} widget
-   * @returns {IDataSource | null}
+   * @returns {IDataSource}
    * @memberof LayoutBuilder
    */
-  private getWidgetDataSource(widget): IDataSource | null {
-    let dataSource: IDataSource | null;
+  private getWidgetDataSource(widget): IDataSource {
+    let dataSource: IDataSource;
 
     if(widget.dataSource) {
       dataSource = new widget.dataSource(widget.options || {});
@@ -195,7 +195,12 @@ export class LayoutBuilder {
       widgetClass = this.getWidgetBaseClass(widgetId),
       dataSourceClass = `${widgetClass}DS`;
 
-      dataSource = this.widgetsDataSources[dataSourceClass] ? new this.widgetsDataSources[dataSourceClass]() : null;
+      // data source control
+      if(!this.widgetsDataSources[dataSourceClass]) {
+        throw Error(`No DataSource for widget: ${widget.id}`);
+      }
+
+      dataSource = new this.widgetsDataSources[dataSourceClass]();
     }
 
     return dataSource;
