@@ -83,7 +83,7 @@ export declare abstract class EventHandler implements IEventHandler {
      * @param {*} payload
      * @memberof EventHandler
      */
-    emitInner(type: string, payload: any): void;
+    emitInner(type: string, payload?: any): void;
     /**
      * emits outer events, targeting outer listener(s)
      *
@@ -91,7 +91,7 @@ export declare abstract class EventHandler implements IEventHandler {
      * @param {*} payload
      * @memberof EventHandler
      */
-    emitOuter(type: string, payload: any): void;
+    emitOuter(type: string, payload?: any): void;
     /**
      * emits global events, targeting app/any listener(s)
      *

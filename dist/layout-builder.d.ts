@@ -101,7 +101,7 @@ export declare class LayoutBuilder {
      *
      * @private
      * @param {*} widget
-     * @returns {IDataSource | null}
+     * @returns {IDataSource}
      * @memberof LayoutBuilder
      */
     private getWidgetDataSource;
@@ -132,12 +132,4 @@ export declare class LayoutBuilder {
      * @memberof LayoutBuilder
      */
     private _ucFirst;
-    /**
-     * triggered on ready$
-     * for internal functionality
-     *
-     * @private
-     * @memberof LayoutBuilder
-     */
-    private _onReady;
 }
