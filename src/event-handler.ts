@@ -87,7 +87,7 @@ export abstract class EventHandler implements IEventHandler {
    * @param {*} payload
    * @memberof EventHandler
    */
-  public emitInner(type: string, payload: any){
+  public emitInner(type: string, payload?: any){
     this.emit(this.innerEvents$, type, payload);
   }
 
@@ -98,7 +98,7 @@ export abstract class EventHandler implements IEventHandler {
    * @param {*} payload
    * @memberof EventHandler
    */
-  public emitOuter(type: string, payload: any){
+  public emitOuter(type: string, payload?: any){
     this.emit(this.out$, type, payload);
   }
 
@@ -122,7 +122,7 @@ export abstract class EventHandler implements IEventHandler {
    * @param {*} payload
    * @memberof EventHandler
    */
-  private emit(context$: Subject<any>, type: string, payload: any){
+  private emit(context$: Subject<any>, type: string, payload?: any){
     // emit signal
     context$.next({
       type: `${this.hostId}.${type}`,
