@@ -20,6 +20,7 @@ export interface IEventHandler {
   debug(): any;
   emitInner(type: string, payload?: any): any;
   emitOuter(type: string, payload?: any): any;
+  emitGlobal(type: string, payload?: any): any;
 }
 
 export interface IProvider {
