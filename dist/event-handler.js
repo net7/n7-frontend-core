@@ -73,6 +73,16 @@ var EventHandler = /** @class */ (function () {
         this.emit(this.out$, type, payload);
     };
     /**
+     * emits global events, targeting app/any listener(s)
+     *
+     * @param {string} type
+     * @param {*} payload
+     * @memberof EventHandler
+     */
+    EventHandler.prototype.emitGlobal = function (type, payload) {
+        EventHandler.globalEvents$.next({ type: "global." + type, payload: payload });
+    };
+    /**
      * generic emitter
      *
      * @private
@@ -122,6 +132,7 @@ var EventHandler = /** @class */ (function () {
     EventHandler.prototype.log = function (context, type, payload) {
         console.log("%c" + context + ": %c" + type, 'color: silver; text-transform: uppercase;', 'color: blue; font-style: italic;', 'payload:', payload);
     };
+    EventHandler.globalEvents$ = new Subject();
     return EventHandler;
 }());
 export { EventHandler };

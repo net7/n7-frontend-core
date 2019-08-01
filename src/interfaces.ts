@@ -7,6 +7,7 @@ export interface IDataSource {
   options: any;
   run(data?: any): any;
   reset(): any;
+  update(): any;
 }
 
 export interface IEventHandler {
@@ -19,6 +20,7 @@ export interface IEventHandler {
   debug(): any;
   emitInner(type: string, payload?: any): any;
   emitOuter(type: string, payload?: any): any;
+  emitGlobal(type: string, payload?: any): any;
 }
 
 export interface IProvider {
@@ -34,4 +36,5 @@ export interface IWidgetConfig {
   dataSource?: any;
   eventHandler?: any;
   options?: any;
+  hasStaticData?: boolean;
 }

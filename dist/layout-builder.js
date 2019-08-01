@@ -91,6 +91,10 @@ var LayoutBuilder = /** @class */ (function () {
                 emit = function (type, payload) { return eh.emitInner(type, payload); };
             }
             _this.widgets[id] = { id: id, ds: ds, eh: eh, emit: emit };
+            // if widget has static data trigger update
+            if (widgetConfig.hasStaticData) {
+                ds.update();
+            }
         });
         // attach events
         this.attachLayoutEvents();
@@ -98,8 +102,6 @@ var LayoutBuilder = /** @class */ (function () {
         if (this.dataSource) {
             this.dataSource['widgets'] = this.widgets;
         }
-        // on ready
-        this.ready$.subscribe(function () { return _this._onReady(); });
         // emit ready
         this.ready$.next();
     };
@@ -145,7 +147,7 @@ var LayoutBuilder = /** @class */ (function () {
      *
      * @private
      * @param {*} widget
-     * @returns {IDataSource | null}
+     * @returns {IDataSource}
      * @memberof LayoutBuilder
      */
     LayoutBuilder.prototype.getWidgetDataSource = function (widget) {
@@ -155,7 +157,11 @@ var LayoutBuilder = /** @class */ (function () {
         }
         else {
             var widgetId = this.getWidgetId(widget), widgetClass = this.getWidgetBaseClass(widgetId), dataSourceClass = widgetClass + "DS";
-            dataSource = this.widgetsDataSources[dataSourceClass] ? new this.widgetsDataSources[dataSourceClass]() : null;
+            // data source control
+            if (!this.widgetsDataSources[dataSourceClass]) {
+                throw Error("No DataSource for widget: " + widget.id);
+            }
+            dataSource = new this.widgetsDataSources[dataSourceClass]();
         }
         return dataSource;
     };
@@ -200,19 +206,6 @@ var LayoutBuilder = /** @class */ (function () {
      */
     LayoutBuilder.prototype._ucFirst = function (str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
-    };
-    /**
-     * triggered on ready$
-     * for internal functionality
-     *
-     * @private
-     * @memberof LayoutBuilder
-     */
-    LayoutBuilder.prototype._onReady = function () {
-        var _this = this;
-        // trigger update for widgets
-        // w/initial data
-        Object.keys(this.widgets).forEach(function (id) { return _this.widgets[id].ds.update(); });
     };
     return LayoutBuilder;
 }());

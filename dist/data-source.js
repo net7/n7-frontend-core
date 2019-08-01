@@ -52,7 +52,7 @@ var DataSource = /** @class */ (function () {
      */
     DataSource.prototype.run = function (inputData) {
         try {
-            this.input = Array.isArray(inputData) && inputData.length === 1 ? inputData[0] : inputData;
+            this.input = inputData;
             // processing...
             this.output = this.transform(this.input, this.options);
             // signal

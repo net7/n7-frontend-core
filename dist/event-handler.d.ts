@@ -49,6 +49,7 @@ import { IEventHandler } from "./interfaces";
  * @implements {IEventHandler}
  */
 export declare abstract class EventHandler implements IEventHandler {
+    static globalEvents$: Subject<any>;
     innerEvents$: Subject<any>;
     outerEvents$: Observable<any>;
     out$: Subject<any>;
@@ -82,7 +83,7 @@ export declare abstract class EventHandler implements IEventHandler {
      * @param {*} payload
      * @memberof EventHandler
      */
-    emitInner(type: string, payload: any): void;
+    emitInner(type: string, payload?: any): void;
     /**
      * emits outer events, targeting outer listener(s)
      *
@@ -90,7 +91,15 @@ export declare abstract class EventHandler implements IEventHandler {
      * @param {*} payload
      * @memberof EventHandler
      */
-    emitOuter(type: string, payload: any): void;
+    emitOuter(type: string, payload?: any): void;
+    /**
+     * emits global events, targeting app/any listener(s)
+     *
+     * @param {string} type
+     * @param {*} payload
+     * @memberof EventHandler
+     */
+    emitGlobal(type: string, payload?: any): void;
     /**
      * generic emitter
      *
