@@ -33,6 +33,22 @@ export declare abstract class LayoutDataSource {
      */
     private getWidgetById;
     /**
+     * gets widget DataSource
+     *
+     * @param {string} widgetId
+     * @returns datasource | null
+     * @memberof LayoutDataSource
+     */
+    getWidgetDataSource(widgetId: string): any;
+    /**
+     * gets widget EventHandler
+     *
+     * @param {string} widgetId
+     * @returns eventhandler | null
+     * @memberof LayoutDataSource
+     */
+    getWidgetEventHandler(widgetId: string): any;
+    /**
      * sets one widget to widgets group
      *
      * use example:
