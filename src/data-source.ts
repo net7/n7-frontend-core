@@ -104,7 +104,7 @@ export abstract class DataSource implements IDataSource {
    * @memberof DataSource
    */
   protected onError(error){
-    const dataSource = this.constructor.name;
+    const dataSource = this.constructor['name'];
     console.error(`${dataSource} error:`, error);
   }
 
