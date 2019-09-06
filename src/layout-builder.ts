@@ -200,7 +200,7 @@ export class LayoutBuilder {
         throw Error(`No DataSource for widget: ${widget.id}`);
       }
 
-      dataSource = new this.widgetsDataSources[dataSourceClass]();
+      dataSource = new this.widgetsDataSources[dataSourceClass](widget.options || {});
     }
 
     return dataSource;

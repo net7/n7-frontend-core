@@ -86,7 +86,7 @@ var DataSource = /** @class */ (function () {
      * @memberof DataSource
      */
     DataSource.prototype.onError = function (error) {
-        var dataSource = this.constructor.name;
+        var dataSource = this.constructor['name'];
         console.error(dataSource + " error:", error);
     };
     /**

@@ -36,6 +36,36 @@ export abstract class LayoutDataSource {
     return this.widgets[widgetId] || null;
   }
   /**
+   * gets widget DataSource
+   *
+   * @param {string} widgetId
+   * @returns datasource | null
+   * @memberof LayoutDataSource
+   */
+  public getWidgetDataSource(widgetId: string){
+    const widget = this.getWidgetById(widgetId);
+    if(widget && widget.ds){
+      return widget.ds;
+    }
+
+    return null;
+  }
+  /**
+   * gets widget EventHandler
+   *
+   * @param {string} widgetId
+   * @returns eventhandler | null
+   * @memberof LayoutDataSource
+   */
+  public getWidgetEventHandler(widgetId: string){
+    const widget = this.getWidgetById(widgetId);
+    if(widget && widget.eh){
+      return widget.eh;
+    }
+
+    return null;
+  }
+  /**
    * sets one widget to widgets group
    * 
    * use example:

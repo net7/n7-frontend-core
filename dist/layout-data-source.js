@@ -35,6 +35,34 @@ var LayoutDataSource = /** @class */ (function () {
         return this.widgets[widgetId] || null;
     };
     /**
+     * gets widget DataSource
+     *
+     * @param {string} widgetId
+     * @returns datasource | null
+     * @memberof LayoutDataSource
+     */
+    LayoutDataSource.prototype.getWidgetDataSource = function (widgetId) {
+        var widget = this.getWidgetById(widgetId);
+        if (widget && widget.ds) {
+            return widget.ds;
+        }
+        return null;
+    };
+    /**
+     * gets widget EventHandler
+     *
+     * @param {string} widgetId
+     * @returns eventhandler | null
+     * @memberof LayoutDataSource
+     */
+    LayoutDataSource.prototype.getWidgetEventHandler = function (widgetId) {
+        var widget = this.getWidgetById(widgetId);
+        if (widget && widget.eh) {
+            return widget.eh;
+        }
+        return null;
+    };
+    /**
      * sets one widget to widgets group
      *
      * use example:
