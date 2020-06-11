@@ -3,7 +3,7 @@
  *
  * implementation example:
  * ```ts
- * import { LayoutDataSource, ApiRequest } from '@n7-frontend/core';
+ * import { LayoutDataSource } from '@n7-frontend/core';
  *
  * export class LayoutDS extends LayoutDataSource {
  *   private http: any;
