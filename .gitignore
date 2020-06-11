@@ -2,3 +2,6 @@ node_modules
 
 # docs
 docs/
+
+# misc
+package-lock.json
