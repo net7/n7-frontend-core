@@ -7,14 +7,14 @@ type PLACEHOLDERS = {
 };
 type CONDITION_FUNC = (key: string, placeholders: PLACEHOLDERS) => string;
 
-export class Translate {
+class Translate {
   private defaultLang: LANG_CODE = null;
   private currentLang: LANG_CODE = null;
   private translations: {
     [key: string]: TRANSLATIONS;
   } = {};
 
-  constructor({ defaultLang, translations }) {
+  public init({ defaultLang, translations }) {
     if (defaultLang) {
       this.setDefaultLang(defaultLang);
     }
@@ -75,7 +75,7 @@ export class Translate {
     // no translation use default
     if (!translationString) {
       const defaultTranslations = this.translations[this.defaultLang];
-      translationString = defaultTranslations ? defaultTranslations[translationKey] : translationKey;
+      translationString = defaultTranslations[translationKey] || translationKey;
     }
 
     if (placeholders) {
@@ -90,3 +90,7 @@ export class Translate {
     });
   }
 }
+
+// exports
+export const translate = new Translate();
+export const _t = translate.getTranslation.bind(translate);
