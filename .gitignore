@@ -5,3 +5,4 @@ docs/
 
 # misc
 package-lock.json
+src/test.ts
