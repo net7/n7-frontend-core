@@ -124,5 +124,5 @@ declare class Translate {
     private parsePlaceholders;
 }
 export declare const translate: Translate;
-export declare const _t: any;
+export declare const _t: (key: string, placeholders?: PLACEHOLDERS, condition?: CONDITION_FUNC) => string;
 export {};
