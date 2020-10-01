@@ -165,7 +165,7 @@ class Translate {
    * @returns {string} translation label
    * @memberof Translate
    */
-  public getTranslation(key: string, placeholders?: PLACEHOLDERS, condition?: CONDITION_FUNC) {
+  public getTranslation(key: string, placeholders?: PLACEHOLDERS, condition?: CONDITION_FUNC): string {
     const currentTranslations = this.translations[this.currentLang];
     const translationKey = condition ? condition(key, placeholders) : key;
     let translationString = currentTranslations ? currentTranslations[translationKey] : null;
@@ -200,4 +200,8 @@ class Translate {
 
 // exports
 export const translate = new Translate();
-export const _t = translate.getTranslation.bind(translate);
+export const _t: (
+  key: string, 
+  placeholders?: PLACEHOLDERS, 
+  condition?: CONDITION_FUNC
+) => string = translate.getTranslation.bind(translate);
