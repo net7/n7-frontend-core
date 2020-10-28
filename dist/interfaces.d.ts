@@ -1,12 +1,12 @@
-import { Subject, Observable } from "rxjs";
+import { Subject, BehaviorSubject, Observable } from "rxjs";
 export interface IDataSource {
-    out$: Subject<any>;
+    out$: BehaviorSubject<any>;
     input: any;
     output: any;
     options: any;
-    run(data?: any): any;
-    reset(): any;
-    update(): any;
+    run(data?: any): void;
+    update(data?: any, options?: any): void;
+    reset(): void;
 }
 export interface IEventHandler {
     innerEvents$: Subject<any>;
@@ -14,18 +14,11 @@ export interface IEventHandler {
     out$: Subject<any>;
     hostId: string;
     dataSource?: IDataSource;
-    listen(): any;
-    debug(): any;
-    emitInner(type: string, payload?: any): any;
-    emitOuter(type: string, payload?: any): any;
-    emitGlobal(type: string, payload?: any): any;
-}
-export interface IProvider {
-    _output: any;
-    _options?: any;
-    out$: Subject<any>;
-    run(): any;
-    reset(): any;
+    listen(): void;
+    debug(): void;
+    emitInner(type: string, payload?: any): void;
+    emitOuter(type: string, payload?: any): void;
+    emitGlobal(type: string, payload?: any): void;
 }
 export interface IWidgetConfig {
     id: string;
