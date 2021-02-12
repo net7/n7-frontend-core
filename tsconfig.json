@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist",
     "strict": false,
     "skipLibCheck": true,
+    "sourceMap": true,
     "typeRoots": [ 
       "node_modules/@types", 
       "node_modules/@n7-frontend/core"
