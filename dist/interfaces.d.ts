@@ -27,3 +27,19 @@ export interface IWidgetConfig {
     options?: any;
     hasStaticData?: boolean;
 }
+export declare type AnalyticsAction = {
+    type: string;
+    payload: any;
+};
+export declare type AnalyticsProviderConfig<T> = {
+    track: (AnalyticsAction: any) => void;
+    actions: ({
+        type: T;
+        filter?: (payload: any) => boolean;
+    } | T)[];
+};
+export interface IAnalyticsProvider<T> {
+    config: AnalyticsProviderConfig<T>;
+    listen: (action$: Subject<AnalyticsAction>) => void;
+}
+export declare type AnalyticsConfig<T> = AnalyticsProviderConfig<T>[];
