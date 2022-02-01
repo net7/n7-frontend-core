@@ -156,10 +156,10 @@ var LayoutBuilder = /** @class */ (function () {
             dataSource = new widget.dataSource(widget.options || {});
         }
         else {
-            var widgetId = this.getWidgetId(widget), widgetClass = this.getWidgetBaseClass(widgetId), dataSourceClass = widgetClass + "DS";
+            var widgetId = this.getWidgetId(widget), widgetClass = this.getWidgetBaseClass(widgetId), dataSourceClass = "".concat(widgetClass, "DS");
             // data source control
             if (!this.widgetsDataSources[dataSourceClass]) {
-                throw Error("No DataSource for widget: " + widget.id);
+                throw Error("No DataSource for widget: ".concat(widget.id));
             }
             dataSource = new this.widgetsDataSources[dataSourceClass](widget.options || {});
         }
@@ -179,7 +179,7 @@ var LayoutBuilder = /** @class */ (function () {
             eventHandler = new widget.eventHandler();
         }
         else {
-            var widgetId = this.getWidgetId(widget), widgetClass = this.getWidgetBaseClass(widgetId), eventHandlerClass = widgetClass + "EH";
+            var widgetId = this.getWidgetId(widget), widgetClass = this.getWidgetBaseClass(widgetId), eventHandlerClass = "".concat(widgetClass, "EH");
             eventHandler = this.widgetsEventHandlers[eventHandlerClass] ? new this.widgetsEventHandlers[eventHandlerClass]() : null;
         }
         return eventHandler;
