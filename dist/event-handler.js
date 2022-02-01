@@ -80,7 +80,7 @@ var EventHandler = /** @class */ (function () {
      * @memberof EventHandler
      */
     EventHandler.prototype.emitGlobal = function (type, payload) {
-        EventHandler.globalEvents$.next({ type: "global." + type, payload: payload });
+        EventHandler.globalEvents$.next({ type: "global.".concat(type), payload: payload });
     };
     /**
      * generic emitter
@@ -94,7 +94,7 @@ var EventHandler = /** @class */ (function () {
     EventHandler.prototype.emit = function (context$, type, payload) {
         // emit signal
         context$.next({
-            type: this.hostId + "." + type,
+            type: "".concat(this.hostId, ".").concat(type),
             payload: payload
         });
     };
@@ -130,7 +130,7 @@ var EventHandler = /** @class */ (function () {
      * @beta
      */
     EventHandler.prototype.log = function (context, type, payload) {
-        console.log("%c" + context + ": %c" + type, 'color: silver; text-transform: uppercase;', 'color: blue; font-style: italic;', 'payload:', payload);
+        console.log("%c".concat(context, ": %c").concat(type), 'color: silver; text-transform: uppercase;', 'color: blue; font-style: italic;', 'payload:', payload);
     };
     EventHandler.globalEvents$ = new Subject();
     return EventHandler;

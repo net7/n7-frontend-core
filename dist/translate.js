@@ -82,7 +82,7 @@ var Translate = /** @class */ (function () {
      */
     Translate.prototype.setLangTranslations = function (code, translations) {
         if (this.translations[code]) {
-            throw Error("Translations for lang " + code + " already exists");
+            throw Error("Translations for lang ".concat(code, " already exists"));
         }
         this.translations[code] = translations;
     };
