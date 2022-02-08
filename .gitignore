@@ -3,6 +3,9 @@ node_modules
 # docs
 docs/
 
+# build
+dist/
+
 # misc
 package-lock.json
 src/test.ts
