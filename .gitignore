@@ -4,7 +4,7 @@ node_modules
 docs/
 
 # build
-dist/
+dist
 
 # misc
 package-lock.json
