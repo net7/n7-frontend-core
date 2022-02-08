@@ -1,5 +1,5 @@
 {
-  "name": "@n7-frontend/core",
+  "name": "@net7/core",
   "version": "3.0.0",
   "description": "",
   "main": "dist/index.js",
