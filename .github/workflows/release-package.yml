@@ -2,9 +2,9 @@ name: Node.js Package
 
 on: 
   push:
-    branches: ['feature/npm-workflow-setup']
-    # tags:
-    #   - v*
+    # branches: ['master']
+    tags:
+      - v*
 
 jobs:
   publish-core:
