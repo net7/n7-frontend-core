@@ -2,12 +2,12 @@ name: Node.js Package
 
 on: 
   push:
-    # branches: ['master']
-    tags:
-      - v*
+    branches: ['feature/npm-workflow-setup']
+    # tags:
+    #   - v*
 
 jobs:
-  publish-common:
+  publish-core:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
