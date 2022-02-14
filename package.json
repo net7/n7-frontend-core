@@ -1,6 +1,6 @@
 {
-  "name": "@n7-frontend/core",
-  "version": "3.0.0",
+  "name": "@net7/core",
+  "version": "3.0.1-rc.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
