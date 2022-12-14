@@ -42,7 +42,7 @@ import { LayoutDataSource } from './layout-data-source';
  */
 export class LayoutBuilder {
   public id: string;
-  public widgets = {};
+  public widgets: IWidgetConfig[] = [];
   public on$: Subject<any> = new Subject();
   public out$: Subject<any> = new Subject();
   public ready$: Subject<any> = new Subject();

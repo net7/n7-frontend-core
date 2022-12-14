@@ -1,3 +1,5 @@
+import { IWidgetConfig } from './interfaces';
+
 /**
  * base abstract class for layout datasources 
  * 
@@ -21,7 +23,7 @@
  * @class LayoutDataSource
  */
 export abstract class LayoutDataSource {
-  widgets: any[];
+  widgets: IWidgetConfig[];
   private selectedWidgets: string[] | null;
 
   /**
