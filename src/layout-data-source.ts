@@ -170,7 +170,7 @@ export abstract class LayoutDataSource {
    * @returns instance
    * @memberof LayoutDataSource
    */
-  public update(data){
+  public update(data): LayoutDataSource {
     if(!this.selectedWidgets){
       throw Error('no widgets selected');
     }
@@ -178,9 +178,7 @@ export abstract class LayoutDataSource {
       const widget = this.getWidgetById(widgetId);
       if(widget) widget.ds.update(data);
     });
-
-    // reset selected
-    this.selectedWidgets = null;
+    return this;
   }
 
   /**
@@ -203,7 +201,7 @@ export abstract class LayoutDataSource {
    * @returns instance
    * @memberof LayoutDataSource
    */
-  public updateOptions(options){
+  public updateOptions(options): LayoutDataSource {
     if(!this.selectedWidgets){
       throw Error('no widgets selected');
     }
@@ -211,8 +209,6 @@ export abstract class LayoutDataSource {
       const widget = this.getWidgetById(widgetId);
       if(widget) widget.ds.options = options;
     });
-
-    // reset selected
-    this.selectedWidgets = null;
+    return this;
   }
 }
