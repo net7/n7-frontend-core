@@ -1,5 +1,6 @@
 import { Subject, merge } from "rxjs";
 import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
+import { LayoutDataSource } from './layout-data-source';
 
 /**
  * base class to build components datasource/eventhandlers connections
@@ -41,7 +42,7 @@ import { IWidgetConfig, IDataSource, IEventHandler } from "./interfaces";
  */
 export class LayoutBuilder {
   public id: string;
-  public widgets = {};
+  public widgets: IWidgetConfig[] = [];
   public on$: Subject<any> = new Subject();
   public out$: Subject<any> = new Subject();
   public ready$: Subject<any> = new Subject();
@@ -75,8 +76,8 @@ export class LayoutBuilder {
     // types
     {
       widgetsConfig: IWidgetConfig[], 
-      widgetsDataSources: any, 
-      widgetsEventHandlers: any, 
+      widgetsDataSources, 
+      widgetsEventHandlers, 
       dataSource?: any, 
       eventHandler?: IEventHandler
     }
