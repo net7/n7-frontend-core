@@ -1,5 +1,6 @@
 import { Subject, BehaviorSubject, Observable } from "rxjs";
-import { DataSource } from './data-source';
+import { EventHandler } from './event-handler';
+import { LayoutDataSource } from './layout-data-source';
 
 export interface IDataSource {
   out$: BehaviorSubject<any>;
@@ -27,6 +28,8 @@ export interface IEventHandler {
 export interface ILayoutConfig {
   layoutId: string;
   widgets?: IWidgetConfig[];
+  layoutDS: any;
+  layoutEH: any;
   widgetsDataSources: any;
   widgetsEventHandlers: any;
   layoutOptions: any;
